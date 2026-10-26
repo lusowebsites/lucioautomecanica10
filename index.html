@@ -265,9 +265,9 @@ window.SITE_ANALYTICS = { ga4Id: '', adsId: '', whatsappConversionLabel: '', pho
 <script>
 'use strict';
 (() => {
-const $ = s => document.querySelector(s), $ = s => [...document.querySelectorAll(s)];
+const $ = s => document.querySelector(s), $$ = s => [...document.querySelectorAll(s)];
 // Abas: clique, toque e navegação por teclado.
-const tabs=$('[role="tab"]');
+const tabs=$$('[role="tab"]');
 function selectTab(tab,focus=false){tabs.forEach(t=>{const on=t===tab;t.setAttribute('aria-selected',String(on));t.tabIndex=on?0:-1;t.classList.toggle('active',on);const panel=document.getElementById(t.getAttribute('aria-controls'));panel.hidden=!on;panel.classList.toggle('active',on);});if(focus)tab.focus();}
 tabs.forEach((tab,i)=>{tab.addEventListener('click',()=>selectTab(tab));tab.addEventListener('keydown',e=>{let next;if(e.key==='ArrowRight')next=(i+1)%tabs.length;if(e.key==='ArrowLeft')next=(i+tabs.length-1)%tabs.length;if(e.key==='Home')next=0;if(e.key==='End')next=tabs.length-1;if(next!==undefined){e.preventDefault();selectTab(tabs[next],true);}});});
 // Menu responsivo, Escape e foco.
@@ -275,27 +275,27 @@ const hamburger=$('#hamburger'),nav=$('#navMenu'),mobile=matchMedia('(max-width:
 function menu(open,focus=false){hamburger.setAttribute('aria-expanded',String(open));hamburger.setAttribute('aria-label',open?'Fechar menu':'Abrir menu');hamburger.classList.toggle('active',open);nav.classList.toggle('active',open);nav.inert=mobile.matches&&!open;if(focus)hamburger.focus();}
 hamburger.addEventListener('click',()=>menu(hamburger.getAttribute('aria-expanded')!=='true'));
 mobile.addEventListener('change',()=>menu(false));menu(false);
-$('.nav-menu a').forEach(a=>a.addEventListener('click',()=>menu(false)));
-$('.faq-item').forEach((item,i)=>{const btn=item.querySelector('.faq-question'),answer=item.querySelector('.faq-answer');answer.id='faq-answer-'+i;btn.setAttribute('aria-controls',answer.id);btn.addEventListener('click',()=>{const open=btn.getAttribute('aria-expanded')!=='true';$('.faq-item').forEach(other=>{other.classList.remove('active');other.querySelector('.faq-question').setAttribute('aria-expanded','false');other.querySelector('.faq-answer').hidden=true;});item.classList.toggle('active',open);btn.setAttribute('aria-expanded',String(open));answer.hidden=!open;});});
+$$('.nav-menu a').forEach(a=>a.addEventListener('click',()=>menu(false)));
+$$('.faq-item').forEach((item,i)=>{const btn=item.querySelector('.faq-question'),answer=item.querySelector('.faq-answer');answer.id='faq-answer-'+i;btn.setAttribute('aria-controls',answer.id);btn.addEventListener('click',()=>{const open=btn.getAttribute('aria-expanded')!=='true';$$('.faq-item').forEach(other=>{other.classList.remove('active');other.querySelector('.faq-question').setAttribute('aria-expanded','false');other.querySelector('.faq-answer').hidden=true;});item.classList.toggle('active',open);btn.setAttribute('aria-expanded',String(open));answer.hidden=!open;});});
 // Atendimento: navegação nativa para o WhatsApp, sem popup programático.
 const sac=$('#sacBtn'),chat=$('#chatbotContainer'),schedule=$('#horarioInfo');
 chat.appendChild(schedule);
 function setChat(open,focus=false){chat.style.display=open?'flex':'none';sac.setAttribute('aria-expanded',String(open));if(open)$('#closeChat').focus();else if(focus)sac.focus();}
 sac.addEventListener('click',()=>setChat(sac.getAttribute('aria-expanded')!=='true'));
 $('#closeChat').addEventListener('click',()=>setChat(false,true));
-$('.chat-btn-option[data-msg]').forEach(btn=>{const a=document.createElement('a');a.className=btn.className;a.innerHTML=btn.innerHTML;a.style.textDecoration='none';a.href='https://wa.me/5548999161977?text='+encodeURIComponent('Olá, vim pelo site e gostaria de informações sobre '+btn.dataset.msg+' para meu veículo em Rio Maina.');a.target='_blank';a.rel='noopener noreferrer';btn.replaceWith(a);});
+$$('.chat-btn-option[data-msg]').forEach(btn=>{const a=document.createElement('a');a.className=btn.className;a.innerHTML=btn.innerHTML;a.style.textDecoration='none';a.href='https://wa.me/5548999161977?text='+encodeURIComponent('Olá, vim pelo site e gostaria de informações sobre '+btn.dataset.msg+' para meu veículo em Rio Maina.');a.target='_blank';a.rel='noopener noreferrer';btn.replaceWith(a);});
 $('#horarioBtn').addEventListener('click',()=>{schedule.hidden=!schedule.hidden;$('#horarioBtn').setAttribute('aria-expanded',String(!schedule.hidden));});
 document.addEventListener('keydown',e=>{if(e.key==='Escape'){if(sac.getAttribute('aria-expanded')==='true')setChat(false,true);if(hamburger.getAttribute('aria-expanded')==='true')menu(false,true);}});
 // Depoimentos fornecidos no arquivo original. Sem selo de verificação automática.
 const data=[['Claudio Marques','Mecânica nota dez, equipe de profissionais muito bem qualificados e o preço justo, o carro ficou perfeito. Super indico.'],['Rodrigo Melo','Mecânica especializada top da linha… Sempre me atendeu prontamente, com qualidade e preços justos!!!'],['Angelo Marcos Mariotti','Show!! Serviço de qualidade, com certeza irei mais vezes!!'],['Gilmar Carvalho','Já fiz vários serviços com Lúcio. Tudo perfeito. Recomendo.']];
 const track=$('#carrosselTrack'),indicators=$('#carrosselIndicators'),container=$('.carrossel-container'),reduced=matchMedia('(prefers-reduced-motion: reduce)');
-let current=0,timer=null,paused=reduced.matches,hover=false,focused=false;
+let current=0,timer=null,paused=reduced.matches;
 data.forEach((_,i)=>{const dot=document.createElement('button');dot.className='indicator-dot';dot.setAttribute('aria-label','Mostrar depoimento '+(i+1));dot.addEventListener('click',()=>show(i));indicators.append(dot);});
 function stop(){if(timer!==null){clearInterval(timer);timer=null;}}
-function start(){stop();if(!paused&&!hover&&!focused&&!document.hidden)timer=setInterval(()=>show(current+1,false),5000);}
+function start(){stop();if(!paused&&!document.hidden)timer=setInterval(()=>show(current+1,false),5000);}
 function show(index,restart=true){current=(index+data.length)%data.length;track.style.transform='translateX(-'+current*100+'%)';[...track.children].forEach((s,i)=>s.setAttribute('aria-hidden',String(i!==current)));[...indicators.children].forEach((d,i)=>{d.classList.toggle('active',i===current);d.setAttribute('aria-current',String(i===current));});if(restart)start();}
 
-$('.carrossel-btn.prev').addEventListener('click',()=>show(current-1));$('.carrossel-btn.next').addEventListener('click',()=>show(current+1));container.addEventListener('mouseenter',()=>{hover=true;stop();});container.addEventListener('mouseleave',()=>{hover=false;start();});container.addEventListener('focusin',()=>{focused=true;stop();});container.addEventListener('focusout',e=>{if(!container.contains(e.relatedTarget)){focused=false;start();}});document.addEventListener('visibilitychange',start);reduced.addEventListener('change',e=>{paused=e.matches;start();});let x=null;track.addEventListener('touchstart',e=>{x=e.changedTouches[0].screenX;},{passive:true});track.addEventListener('touchend',e=>{if(x!==null){const diff=x-e.changedTouches[0].screenX;if(Math.abs(diff)>50)show(current+(diff>0?1:-1));x=null;}},{passive:true});show(0);
+$('.carrossel-btn.prev').addEventListener('click',()=>show(current-1));$('.carrossel-btn.next').addEventListener('click',()=>show(current+1));document.addEventListener('visibilitychange',start);reduced.addEventListener('change',e=>{paused=e.matches;start();});let x=null;track.addEventListener('touchstart',e=>{x=e.changedTouches[0].screenX;},{passive:true});track.addEventListener('touchend',e=>{if(x!==null){const diff=x-e.changedTouches[0].screenX;if(Math.abs(diff)>50)show(current+(diff>0?1:-1));x=null;}},{passive:true});show(0);
 // Medição opcional: carregamento básico somente após consentimento.
 const cfg=window.SITE_ANALYTICS||{},ga=/^G-[A-Z0-9]+$/.test(cfg.ga4Id||'')?cfg.ga4Id:'',ads=/^AW-[0-9]+$/.test(cfg.adsId||'')?cfg.adsId:'';
 const key='lucio-measurement-consent-v1';let consent='denied',loaded=false;

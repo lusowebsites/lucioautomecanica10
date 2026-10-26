@@ -134,7 +134,10 @@
         
         <div class="carrossel-wrapper">
           <div class="carrossel-track" id="carrosselTrack">
-            <!-- Os slides serão inseridos via JavaScript -->
+<div class="carrossel-slide" role="group" aria-label="Depoimento 1 de 4"><article class="testimonial-card"><div class="testimonial-header"><img src="https://i.imgur.com/SaVgt6B.png" class="testimonial-avatar" alt="Foto de perfil de Claudio Marques" width="56" height="56" loading="lazy"><div><p class="testimonial-name">Claudio Marques</p><div class="stars" aria-label="5 de 5 estrelas"><span aria-hidden="true">★★★★★</span></div></div></div><p class="testimonial-text">Mecânica nota dez, equipe de profissionais muito bem qualificados e o preço justo, o carro ficou perfeito. Super indico.</p></article></div>
+<div class="carrossel-slide" role="group" aria-label="Depoimento 2 de 4"><article class="testimonial-card"><div class="testimonial-header"><img src="https://i.imgur.com/FM71Hlk.png" class="testimonial-avatar" alt="Foto de perfil de Rodrigo Melo" width="56" height="56" loading="lazy"><div><p class="testimonial-name">Rodrigo Melo</p><div class="stars" aria-label="5 de 5 estrelas"><span aria-hidden="true">★★★★★</span></div></div></div><p class="testimonial-text">Mecânica especializada top da linha… Sempre me atendeu prontamente, com qualidade e preços justos!!!</p></article></div>
+<div class="carrossel-slide" role="group" aria-label="Depoimento 3 de 4"><article class="testimonial-card"><div class="testimonial-header"><img src="https://i.imgur.com/VxJoGY6.png" class="testimonial-avatar" alt="Foto de perfil de Angelo Marcos Mariotti" width="56" height="56" loading="lazy"><div><p class="testimonial-name">Angelo Marcos Mariotti</p><div class="stars" aria-label="5 de 5 estrelas"><span aria-hidden="true">★★★★★</span></div></div></div><p class="testimonial-text">Show!! Serviço de qualidade, com certeza irei mais vezes!!</p></article></div>
+<div class="carrossel-slide" role="group" aria-label="Depoimento 4 de 4"><article class="testimonial-card"><div class="testimonial-header"><img src="https://i.imgur.com/m6yL6Bq.png" class="testimonial-avatar" alt="Foto de perfil de Gilmar Carvalho" width="56" height="56" loading="lazy"><div><p class="testimonial-name">Gilmar Carvalho</p><div class="stars" aria-label="5 de 5 estrelas"><span aria-hidden="true">★★★★★</span></div></div></div><p class="testimonial-text">Já fiz vários serviços com Lúcio. Tudo perfeito. Recomendo.</p></article></div>
           </div>
         </div>
         
@@ -252,7 +255,61 @@
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"AutoRepair","name":"Lúcio Auto Mecânica","alternateName":"Lúcio Auto Mecânica em Rio Maina","description":"Oficina mecânica em Rio Maina, Criciúma SC com diagnóstico preciso, transparência e serviço garantido. Troca de óleo, suspensão, motor, freios e elétrica.","image":"https://i.imgur.com/M9zyA3p.png","telephone":"+5548999161977","priceRange":"$$","address":{"@type":"PostalAddress","streetAddress":"Rua Alina Alexandrina Mateus, 157","addressLocality":"Criciúma","addressRegion":"SC","addressCountry":"BR","postalCode":"88817-643"},"geo":{"@type":"GeoCoordinates","latitude":-28.6774,"longitude":-49.3799},"openingHoursSpecification":[{"@type":"OpeningHoursSpecification","dayOfWeek":["Monday","Tuesday","Wednesday","Thursday","Friday"],"opens":"08:00","closes":"12:00"},{"@type":"OpeningHoursSpecification","dayOfWeek":["Monday","Tuesday","Wednesday","Thursday","Friday"],"opens":"13:30","closes":"18:00"}],"areaServed":["Rio Maina","Próspera","Santa Bárbara","Centro","Pinheirinho","Vila Zuleima","Mineira Nova","Santo Antônio","Laranjinha","Colonial","Metropol","Naspolini","Lote 6","Vera Cruz"],"hasMap":"https://maps.app.goo.gl/HB9gzpP8AmKhRYXd6","url":"https://lucioautomecanica.com.br"}</script>
 
 
-<script src="config.js" defer></script>
-<script src="site.js" defer></script>
+<script>
+/* Sem identificadores válidos, nenhuma tag de medição é carregada.
+Preencha ga4Id (G-...), adsId (AW-...) e os rótulos de conversão fornecidos pela sua conta.
+Se importar conversões do GA4, não configure os mesmos eventos também como conversões diretas do Ads. */
+window.SITE_ANALYTICS = { ga4Id: '', adsId: '', whatsappConversionLabel: '', phoneConversionLabel: '' };
+
+</script>
+<script>
+'use strict';
+(() => {
+const $ = s => document.querySelector(s), $ = s => [...document.querySelectorAll(s)];
+// Abas: clique, toque e navegação por teclado.
+const tabs=$('[role="tab"]');
+function selectTab(tab,focus=false){tabs.forEach(t=>{const on=t===tab;t.setAttribute('aria-selected',String(on));t.tabIndex=on?0:-1;t.classList.toggle('active',on);const panel=document.getElementById(t.getAttribute('aria-controls'));panel.hidden=!on;panel.classList.toggle('active',on);});if(focus)tab.focus();}
+tabs.forEach((tab,i)=>{tab.addEventListener('click',()=>selectTab(tab));tab.addEventListener('keydown',e=>{let next;if(e.key==='ArrowRight')next=(i+1)%tabs.length;if(e.key==='ArrowLeft')next=(i+tabs.length-1)%tabs.length;if(e.key==='Home')next=0;if(e.key==='End')next=tabs.length-1;if(next!==undefined){e.preventDefault();selectTab(tabs[next],true);}});});
+// Menu responsivo, Escape e foco.
+const hamburger=$('#hamburger'),nav=$('#navMenu'),mobile=matchMedia('(max-width:900px)');
+function menu(open,focus=false){hamburger.setAttribute('aria-expanded',String(open));hamburger.setAttribute('aria-label',open?'Fechar menu':'Abrir menu');hamburger.classList.toggle('active',open);nav.classList.toggle('active',open);nav.inert=mobile.matches&&!open;if(focus)hamburger.focus();}
+hamburger.addEventListener('click',()=>menu(hamburger.getAttribute('aria-expanded')!=='true'));
+mobile.addEventListener('change',()=>menu(false));menu(false);
+$('.nav-menu a').forEach(a=>a.addEventListener('click',()=>menu(false)));
+$('.faq-item').forEach((item,i)=>{const btn=item.querySelector('.faq-question'),answer=item.querySelector('.faq-answer');answer.id='faq-answer-'+i;btn.setAttribute('aria-controls',answer.id);btn.addEventListener('click',()=>{const open=btn.getAttribute('aria-expanded')!=='true';$('.faq-item').forEach(other=>{other.classList.remove('active');other.querySelector('.faq-question').setAttribute('aria-expanded','false');other.querySelector('.faq-answer').hidden=true;});item.classList.toggle('active',open);btn.setAttribute('aria-expanded',String(open));answer.hidden=!open;});});
+// Atendimento: navegação nativa para o WhatsApp, sem popup programático.
+const sac=$('#sacBtn'),chat=$('#chatbotContainer'),schedule=$('#horarioInfo');
+chat.appendChild(schedule);
+function setChat(open,focus=false){chat.style.display=open?'flex':'none';sac.setAttribute('aria-expanded',String(open));if(open)$('#closeChat').focus();else if(focus)sac.focus();}
+sac.addEventListener('click',()=>setChat(sac.getAttribute('aria-expanded')!=='true'));
+$('#closeChat').addEventListener('click',()=>setChat(false,true));
+$('.chat-btn-option[data-msg]').forEach(btn=>{const a=document.createElement('a');a.className=btn.className;a.innerHTML=btn.innerHTML;a.style.textDecoration='none';a.href='https://wa.me/5548999161977?text='+encodeURIComponent('Olá, vim pelo site e gostaria de informações sobre '+btn.dataset.msg+' para meu veículo em Rio Maina.');a.target='_blank';a.rel='noopener noreferrer';btn.replaceWith(a);});
+$('#horarioBtn').addEventListener('click',()=>{schedule.hidden=!schedule.hidden;$('#horarioBtn').setAttribute('aria-expanded',String(!schedule.hidden));});
+document.addEventListener('keydown',e=>{if(e.key==='Escape'){if(sac.getAttribute('aria-expanded')==='true')setChat(false,true);if(hamburger.getAttribute('aria-expanded')==='true')menu(false,true);}});
+// Depoimentos fornecidos no arquivo original. Sem selo de verificação automática.
+const data=[['Claudio Marques','Mecânica nota dez, equipe de profissionais muito bem qualificados e o preço justo, o carro ficou perfeito. Super indico.'],['Rodrigo Melo','Mecânica especializada top da linha… Sempre me atendeu prontamente, com qualidade e preços justos!!!'],['Angelo Marcos Mariotti','Show!! Serviço de qualidade, com certeza irei mais vezes!!'],['Gilmar Carvalho','Já fiz vários serviços com Lúcio. Tudo perfeito. Recomendo.']];
+const track=$('#carrosselTrack'),indicators=$('#carrosselIndicators'),container=$('.carrossel-container'),reduced=matchMedia('(prefers-reduced-motion: reduce)');
+let current=0,timer=null,paused=reduced.matches,hover=false,focused=false;
+data.forEach((_,i)=>{const dot=document.createElement('button');dot.className='indicator-dot';dot.setAttribute('aria-label','Mostrar depoimento '+(i+1));dot.addEventListener('click',()=>show(i));indicators.append(dot);});
+function stop(){if(timer!==null){clearInterval(timer);timer=null;}}
+function start(){stop();if(!paused&&!hover&&!focused&&!document.hidden)timer=setInterval(()=>show(current+1,false),5000);}
+function show(index,restart=true){current=(index+data.length)%data.length;track.style.transform='translateX(-'+current*100+'%)';[...track.children].forEach((s,i)=>s.setAttribute('aria-hidden',String(i!==current)));[...indicators.children].forEach((d,i)=>{d.classList.toggle('active',i===current);d.setAttribute('aria-current',String(i===current));});if(restart)start();}
+
+$('.carrossel-btn.prev').addEventListener('click',()=>show(current-1));$('.carrossel-btn.next').addEventListener('click',()=>show(current+1));container.addEventListener('mouseenter',()=>{hover=true;stop();});container.addEventListener('mouseleave',()=>{hover=false;start();});container.addEventListener('focusin',()=>{focused=true;stop();});container.addEventListener('focusout',e=>{if(!container.contains(e.relatedTarget)){focused=false;start();}});document.addEventListener('visibilitychange',start);reduced.addEventListener('change',e=>{paused=e.matches;start();});let x=null;track.addEventListener('touchstart',e=>{x=e.changedTouches[0].screenX;},{passive:true});track.addEventListener('touchend',e=>{if(x!==null){const diff=x-e.changedTouches[0].screenX;if(Math.abs(diff)>50)show(current+(diff>0?1:-1));x=null;}},{passive:true});show(0);
+// Medição opcional: carregamento básico somente após consentimento.
+const cfg=window.SITE_ANALYTICS||{},ga=/^G-[A-Z0-9]+$/.test(cfg.ga4Id||'')?cfg.ga4Id:'',ads=/^AW-[0-9]+$/.test(cfg.adsId||'')?cfg.adsId:'';
+const key='lucio-measurement-consent-v1';let consent='denied',loaded=false;
+try{consent=localStorage.getItem(key)==='granted'?'granted':'denied';}catch{}
+window.dataLayer=window.dataLayer||[];function gtag(){window.dataLayer.push(arguments);}
+function loadTags(){if(loaded||(!ga&&!ads))return;loaded=true;gtag('consent','default',{analytics_storage:'granted',ad_storage:ads?'granted':'denied',ad_user_data:ads?'granted':'denied',ad_personalization:'denied'});gtag('js',new Date());if(ga)gtag('config',ga);if(ads)gtag('config',ads);const script=document.createElement('script');script.async=true;script.src='https://www.googletagmanager.com/gtag/js?id='+encodeURIComponent(ga||ads);document.head.append(script);}
+function trackContact(type,label){if(consent!=='granted'||(!ga&&!ads))return;loadTags();if(ga)gtag('event',type,{send_to:ga,event_category:'contato',event_label:label});const conversion=type==='whatsapp_click'?cfg.whatsappConversionLabel:cfg.phoneConversionLabel;if(ads&&/^[A-Za-z0-9_-]+$/.test(conversion||''))gtag('event','conversion',{send_to:ads+'/'+conversion});}
+document.addEventListener('click',e=>{const a=e.target.closest('a');if(!a)return;const href=a.getAttribute('href')||'';if(href.startsWith('https://wa.me/'))trackContact('whatsapp_click',a.textContent.trim()||'whatsapp_flutuante');if(href.startsWith('tel:'))trackContact('click_phone','telefone');});
+const banner=document.createElement('section');banner.className='consent-banner';banner.setAttribute('role','region');banner.setAttribute('aria-label','Preferências de privacidade');banner.hidden=true;banner.innerHTML='<p>Você permite medição opcional de visitas e cliques de contato pelo Google? Sua escolha pode ser alterada no rodapé. <a href="privacidade.html">Política de privacidade</a></p><div class="consent-actions"><button type="button" data-choice="denied">Recusar medição</button><button type="button" data-choice="granted">Permitir medição</button></div>';document.body.append(banner);
+function choose(value){consent=value;try{localStorage.setItem(key,value);}catch{}if(value==='granted')loadTags();else if(loaded){gtag('consent','update',{analytics_storage:'denied',ad_storage:'denied',ad_user_data:'denied',ad_personalization:'denied'});location.reload();}banner.hidden=true;$('#privacySettings').focus();}
+banner.querySelectorAll('[data-choice]').forEach(btn=>btn.addEventListener('click',()=>choose(btn.dataset.choice)));$('#privacySettings').addEventListener('click',()=>{banner.hidden=false;if(!ga&&!ads)banner.querySelector('p').textContent='A medição opcional está desativada neste site. Você pode salvar sua preferência para uma futura ativação. Consulte também a política de privacidade.';banner.querySelector('button').focus();});
+if(ga||ads){let saved=null;try{saved=localStorage.getItem(key);}catch{}if(saved===null)banner.hidden=false;if(consent==='granted')loadTags();}
+})();
+
+</script>
 </body>
 </html>
